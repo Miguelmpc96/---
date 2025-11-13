@@ -36,23 +36,138 @@
             Descargar
         </a>
 <div class="container">
-  <h1>FormSubmit Demo</h1>
-  <form target="_blank" action="https://formsubmit.co/miguelmpc1996@gmail.com" method="POST">
-    <div class="form-group">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-        </div>
-        <div class="col">
-          <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-        </div>
-      </div>
+<div class="container">
+  <div class="w-full max-w-xl bg-white shadow-2xl rounded-xl p-6 md:p-10 border border-gray-100">
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">Envíanos tu Solicitud</h1>
+        <p class="text-gray-500 mb-8">Completa los campos obligatorios (*) para que podamos revisar tu proyecto.</p>
+
+        <!--
+            Configuración del Formulario:
+            1. action: Destinatario principal (miguelmpc1996@gmail.com).
+            2. method: POST.
+            3. enctype: multipart/form-data (OBLIGATORIO para subir archivos).
+        -->
+        <form
+            action="https://formsubmit.co/miguelmpc1996@gmail.com"
+            method="POST"
+            enctype="multipart/form-data"
+            class="space-y-6"
+        >
+
+            <!-- **CAMPOS OCULTOS DE CONFIGURACIÓN DE FORMSUBMIT** -->
+
+            <!-- 1. Copia de respaldo (CC) -->
+            <input type="hidden" name="_cc" value="pozoselsombrero@gmail.com">
+
+            <!-- 2. Asunto del Correo -->
+            <input type="hidden" name="_subject" value="¡Nueva Solicitud de Presupuesto (Formulario Web)!">
+
+            <!-- 3. Auto-Respuesta (Mensaje de confirmación al usuario) -->
+            <input type="hidden" name="_autoresponse" value="Recibimos tu solicitud. ¡Gracias por contactarnos! Estamos revisando tus datos y nos pondremos en contacto contigo en las próximas 24h.">
+
+            <!-- 4. Webhook (Para manipular datos en tiempo real) - Placeholder -->
+            <input type="hidden" name="_webhook" value="https://yourdomain.co/your-webhook-placeholder">
+
+            <!-- 5. Deshabilitar CAPTCHA (Opcional, se recomienda NO deshabilitarlo) -->
+            <!-- <input type="hidden" name="_captcha" value="false"> -->
+
+            <!-- **CAMPOS VISIBLES DEL FORMULARIO** -->
+
+            <!-- Campo de Correo Electrónico (Obligatorio y para _autoresponse) -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico (*)</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="ejemplo@dominio.com"
+                    required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                >
+            </div>
+
+            <!-- Campo de Presupuesto (Lista Select) -->
+            <div>
+                <label for="presupuesto" class="block text-sm font-medium text-gray-700 mb-1">Presupuesto Estimado (USD) (*)</label>
+                <select
+                    name="presupuesto"
+                    id="presupuesto"
+                    required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 bg-white"
+                >
+                    <option value="" disabled selected>Selecciona tu rango de inversión</option>
+                    <!-- Rangos solicitados -->
+                    <option value="100-1000">$100.00 - $1,000.00 USD</option>
+                    <option value="1000-1500">$1,000.00 - $1,500.00 USD</option>
+                    <option value="1500-2000">$1,500.00 - $2,000.00 USD</option>
+                    <option value="2000-3000">$2,000.00 - $3,000.00 USD</option>
+                    <option value="3000-5000">$3,000.00 - $5,000.00 USD</option>
+                    <option value="5000-7500">$5,000.00 - $7,500.00 USD</option>
+                    <option value="7500-10000">$7,500.00 - $10,000.00 USD</option>
+                    <option value="10000+">Más de $10,000.00 USD</option>
+                </select>
+            </div>
+
+            <!-- Campo de WhatsApp (Recomendado, con hint de código de país) -->
+            <div>
+                <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">Número de WhatsApp (Recomendado)</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500 text-sm font-bold">+</span>
+                    </div>
+                    <input
+                        type="tel"
+                        name="whatsapp"
+                        id="whatsapp"
+                        placeholder="Código País + Número (Ej: 58 412 1234567)"
+                        class="block w-full pl-6 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    >
+                    <p class="text-xs text-gray-400 mt-1">Incluye el código del país (Ej: +58).</p>
+                </div>
+            </div>
+
+            <!-- Campo de Descripción (Obligatorio) -->
+            <div>
+                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">Descripción del Proyecto/Solicitud (*)</label>
+                <textarea
+                    name="descripcion"
+                    id="descripcion"
+                    rows="4"
+                    placeholder="Describe detalladamente tu solicitud, qué necesitas y tus objetivos..."
+                    required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                ></textarea>
+            </div>
+
+            <!-- Campo de Subida de Archivo (Recibo) -->
+            <div>
+                <label for="recibo" class="block text-sm font-medium text-gray-700 mb-1">Subir Recibo (JPG, PNG o PDF)</label>
+                <input
+                    type="file"
+                    name="recibo"
+                    id="recibo"
+                    accept=".jpg, .jpeg, .png, .pdf"
+                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0"
+                >
+            </div>
+<input type="hidden" name="_next" value="https://pozoselsombrero.github.io/--/">
+            <!-- Botón de Envío -->
+            <div class="pt-4">
+                <button
+                    type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-lg font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                >
+                    Enviar Solicitud
+                </button>
+            </div>
+
+        </form>
+
+        <p class="mt-8 text-center text-xs text-gray-400">
+            Al enviar este formulario, aceptas que tus datos sean enviados a través de FormSubmit.co.
+        </p>
     </div>
-    <div class="form-group">
-      <textarea placeholder="Your Message" class="form-control" name="message" rows="10" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-lg btn-dark btn-block">Submit Form</button>
-  </form>
+</div>
 </div>
     </div>
     <script src="script.js"></script>
@@ -60,5 +175,6 @@
 </body>
 
 </html>
+
 
 
