@@ -1,0 +1,99 @@
+/* Variables CSS para colores */
+:root {
+    --text-color: #333333; /* Gris oscuro para el texto principal */
+    --button-color: #0474b4; /* Azul corporativo */
+    --bg-color: #ffffff; /* Fondo blanco */
+    --max-width-content: 500px; /* Ancho máximo para el contenido central */
+}
+
+/* Estilos generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem; /* Padding general */
+    overflow-x: hidden;
+}
+
+/* Contenedor principal para centrar el contenido */
+.main-container {
+    max-width: var(--max-width-content);
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out forwards;
+}
+
+/* ------------------------------------------------ */
+/* ESTILO DEL BOTÓN (Cuadrado, Shadow y Texto Fuerte) */
+/* ------------------------------------------------ */
+.btn-download {
+    background-color: var(--button-color);
+    color: white;
+    border-radius: 0; /* Bordes cuadrados */
+    transition: all 0.3s ease-in-out;
+    border: 2px solid var(--button-color);
+    font-weight: 900; /* Más grueso como el original */
+    text-transform: uppercase;
+    /* Sombra más marcada y azulada, similar a la primera versión */
+    box-shadow: 0 4px 10px rgba(4, 116, 180, 0.5); 
+}
+
+/* Efecto hover para el botón */
+.btn-download:hover {
+    background-color: white;
+    color: var(--button-color);
+    border-color: var(--button-color);
+    /* Sombra más sutil en hover */
+    box-shadow: 0 6px 15px rgba(4, 116, 180, 0.7); 
+    transform: translateY(-2px);
+}
+
+/* ------------------------------------------------ */
+/* ESTILOS DEL CARRUSEL (Más Pequeño)              */
+/* ------------------------------------------------ */
+.carousel-wrapper {
+    /* Nuevo contenedor para limitar el ancho del carrusel, haciéndolo más pequeño */
+    max-width: 300px; /* Tamaño reducido, puedes ajustarlo */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    /* Fuerza el aspecto 1:1, crucial para imágenes cuadradas */
+    padding-top: 100%; 
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.0s ease-in-out; /* Duración del difuminado */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor 1:1 */
+    object-position: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+/* Keyframes de animación general */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
